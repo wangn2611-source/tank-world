@@ -829,7 +829,18 @@ function spawnEnemy() {
 }
 
 function spawnPlayer() {
-  const x = 11 * TILE, y = 23 * TILE;
+  // 出生在基地左下方的安全区域（避开基地保护砖块）
+  const x = 8 * TILE, y = 24 * TILE;
+  // 确保出生点周围没有障碍物
+  for (let row = 23; row <= 25; row++) {
+    for (let col = 7; col <= 10; col++) {
+      if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
+        if (map[row][col] !== TILE_BASE && map[row][col] !== TILE_WATER && map[row][col] !== TILE_STEEL) {
+          map[row][col] = TILE_EMPTY;
+        }
+      }
+    }
+  }
   const player = new Tank(x, y, DIR.UP, true);
   player.shieldTime = 180;
   playerTanks.push(player);
