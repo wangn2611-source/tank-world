@@ -1,6 +1,9 @@
 # Environment (contains GitHub token)
 .env
 
+# Claude memory (contains sensitive info)
+.claude/
+
 # OS files
 .DS_Store
 Thumbs.db
